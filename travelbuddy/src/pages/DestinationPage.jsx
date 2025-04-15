@@ -1,11 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getFlightOffers, getHotelOffers } from "../api/amadeus";
+import useItineraryStore from "../store/useItineraryStore";
+
 
 function DestinationPage() {
   const { cityCode } = useParams();
   const [flights, setFlights] = useState([]);
   const [hotels, setHotels] = useState([]);
+  const addItem = useItineraryStore((state) => state.addItem);
+
 
   /*useEffect(() => {
     async function fetchData() {
@@ -58,8 +62,21 @@ function DestinationPage() {
             <li key={index} className="border p-3 rounded shadow-sm">
               <p>Price: {flight.price.total} {flight.price.currency}</p>
               <p>Carrier: {flight.validatingAirlineCodes?.[0]}</p>
-            </li>
-          ))}
+
+              <button
+                className="mt-2 text-sm text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
+                onClick={() =>
+                    addItem({
+                        id: `${flight.validatingAirlineCodes?.[0]}-${index}`,
+                        type: "flight",
+                        label: `Flight ${flight.validatingAirlineCodes?.[0]} - ${flight.price.total} ${flight.price.currency}`,
+                    })
+                }
+            >
+                Add to Itinerary
+            </button>
+        </li>
+            ))}
         </ul>
       )}
 
