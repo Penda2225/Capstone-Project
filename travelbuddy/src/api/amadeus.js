@@ -32,4 +32,26 @@ export async function getAccessToken() {
 
   return cachedToken;
 }
+
+export async function searchCity(keyword) {
+    const token = await getAccessToken();
+  
+    const response = await fetch(
+      `https://test.api.amadeus.com/v1/reference-data/locations?keyword=${keyword}&subType=CITY`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  
+    const data = await response.json();
+  
+    if (!response.ok) {
+      throw new Error(data.errors?.[0]?.detail || "Failed to fetch cities");
+    }
+  
+    return data.data; // returns array of destination 
+  }
+  
  
