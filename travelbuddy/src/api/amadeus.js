@@ -58,12 +58,17 @@ export async function searchCity(keyword) {
     return data.data; // returns array of destination 
   }
   
-  export async function getFlightOffers(destinationCode) {
-    const token = await getAccessToken();
-    const origin = "LON"; // example origin (London), later make this dynamic
-  
+  export async function getFlightOffers(originCode, destinationCode, date) {
+    //const token = await getAccessToken();
+    //const origin = "LON"; // example origin (London), later make this dynamic
+    if (!originCode || originCode.length !== 3) {
+        throw new Error("Invalid origin IATA code");
+      }
+      const token = await getAccessToken();
+    //const formattedDate = new Date(date).toISOString().slice(0, 10);
+    //console.log("Sending formattedDate:", formattedDate); // Optional debug
     const response = await fetch(
-      /*proxy +*/ `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${origin}&destinationLocationCode=${destinationCode}&departureDate=2025-05-05&adults=1`,
+      /*proxy +*/ `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originCode}&destinationLocationCode=${destinationCode}&departureDate=${date}&adults=1`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +88,7 @@ export async function searchCity(keyword) {
     const token = await getAccessToken();
   
     const response = await fetch(
-      proxy + `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=${cityCode}`,
+      /*proxy*/ + `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=${cityCode}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

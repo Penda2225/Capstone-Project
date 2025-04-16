@@ -15,7 +15,23 @@ function ItineraryPage() {
         <div className="space-y-4">
           {items.map((item) => (
             <div key={item.id} className="border p-3 rounded shadow">
-              <p>{item.label}</p>
+              {item.type === "Flight" ? (
+                <>
+                <p className="font-semibold text-lg">
+                     {item.origin} → {item.destination}
+                </p>
+                <p>
+                    {new Date(item.departureTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} → {new Date(item.arrivalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
+                <p className="text-sm text-gray-600">
+                Airline: {item.carrier} — {item.price} {item.currency}
+                </p>
+                <p className="text-sm text-gray-500">Date: {item.date}</p>
+            </>
+            ) : (
+            <p>{item.label}</p>
+            )}
+
               <button
                 className="text-red-500 text-sm mt-2"
                 onClick={() => removeItem(item.id)}
