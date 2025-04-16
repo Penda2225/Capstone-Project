@@ -9,7 +9,7 @@ function ItineraryPage() {
 
   return (
     <div className="p-8 max-w-3xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold text-blue-600 mb-4">My Itinerary</h1>
+      <h1 className="text-3xl font-bold text-purple-400 mb-4">My Itinerary</h1>
       <Link
         to={`/destination/${localStorage.getItem("lastCityCode") || ""}`}
         className="text-blue-600 underline text-sm inline-block mb-4"
@@ -22,7 +22,7 @@ function ItineraryPage() {
       ) : (
         <div className="space-y-4">
           {items.map((item) => (
-            <div key={item.id} className="border p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition">
+            <div key={item.id} className="border p-4 rounded-xl shadow-md bg-gray-900 hover:shadow-md transition">
               {item.type === "Flight" ? (
                 <>
                 <p className="font-semibold text-lg">
@@ -34,7 +34,7 @@ function ItineraryPage() {
                 <p className="text-sm text-gray-600">
                 Airline: {item.carrier} — {item.price} {item.currency}
                 </p>
-                <p className="text-sm text-gray-500">Date: {item.date}</p>
+                <p className="text-sm text-purple-200">Date: {item.date}</p>
             </>
             ) : (
             <p>{item.label}</p>

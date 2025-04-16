@@ -81,27 +81,28 @@ function DestinationPage() {
 
   return (
     <div className="p-8 max-w-3xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold text-blue-600 mb-2">
+      <h1 className="text-3xl font-bold text-purple-400 mb-2">
         Destination Details: {cityCode}
       </h1>
       <Link to="/" className="text-blue-600 underline text-sm mb-4 inline-block">← Back to Search</Link>
 
     <div className="mb-6">
-        <label className="block text-sm font-medium mb-1 text-gray-700">
+        <label className="block text-sm font-medium mb-1 text-white/80">
             Select your travel date:
         </label>
         <input
             type="date"
             value={travelDate}
             onChange={(e) => setTravelDate(e.target.value)}
-            className="border p-2 rounded"
+            className="border border-purple-600 bg-gray-900 text-white placeholder-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
+
     </div>
 
     <div className="flex justify-end mb-4">
         <Link
             to="/itinerary"
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="bg-purple-800 text-white px-4 py-2 rounded hover:bg-green-700"
     >
             View My Itinerary
         </Link>
@@ -123,17 +124,17 @@ function DestinationPage() {
         const arrivalTime = new Date(lastSegment.arrival.at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         return (
-            <li key={index} className="border p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition">
+            <li key={index} className="border p-4 rounded-xl shadow-md bg-gray-900 hover:shadow-md transition">
             <p className="text-sm font-semibold">
                 {segment.departure.iataCode} → {lastSegment.arrival.iataCode}
             </p>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-white/80">
                 {departureTime} → {arrivalTime}
             </p>
             <p className="text-sm">Carrier: {flight.validatingAirlineCodes?.[0]}</p>
             <p className="text-sm">Price: {flight.price.total} {flight.price.currency}</p>
             <button
-                className="mt-2 text-sm text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
+                className="mt-2 text-sm text-white bg-blue-500 px-3 py-1 rounded hover:bg-purple-600"
                 onClick={() => {
                 addItem({
                     id: `${flight.validatingAirlineCodes?.[0]}-${index}`,
@@ -159,7 +160,7 @@ function DestinationPage() {
     )}
   </>
 ) : (
-  <p className="text-gray-500">Please select a travel date.</p>
+  <p className="text-purple-200">Please select a travel date.</p>
 )}
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">Hotels</h2>
@@ -168,7 +169,7 @@ function DestinationPage() {
       ) : (
         <ul className="space-y-2">
           {hotels.map((hotel, index) => (
-            <li key={index} className="border p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition">
+            <li key={index} className="border p-4 rounded-xl shadow-md bg-gray-900 hover:shadow-md transition">
               <p>{hotel.hotel.name}</p>
               <p>Rating: {hotel.hotel.rating || "N/A"}</p>
               <p>City: {hotel.hotel.address?.cityName}</p>

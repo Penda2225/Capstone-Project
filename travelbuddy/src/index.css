@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* === Custom Theme Overrides === */
+:root {
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --card-bg: #1f1f1f;
+  --text-muted: #cccccc;
+}
