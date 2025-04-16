@@ -1,4 +1,6 @@
 import useItineraryStore from "../store/useItineraryStore";
+import { Link } from "react-router-dom";
+
 
 function ItineraryPage() {
   const items = useItineraryStore((state) => state.items);
@@ -6,15 +8,21 @@ function ItineraryPage() {
   const clearItinerary = useItineraryStore((state) => state.clearItinerary);
 
   return (
-    <div className="p-8 max-w-3xl mx-auto">
+    <div className="p-8 max-w-3xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-blue-600 mb-4">My Itinerary</h1>
+      <Link
+        to={`/destination/${localStorage.getItem("lastCityCode") || ""}`}
+        className="text-blue-600 underline text-sm inline-block mb-4"
+        >
+        ← Back to Destination
+        </Link>
 
       {items.length === 0 ? (
         <p>No items yet. Go add flights or hotels!</p>
       ) : (
         <div className="space-y-4">
           {items.map((item) => (
-            <div key={item.id} className="border p-3 rounded shadow">
+            <div key={item.id} className="border p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition">
               {item.type === "Flight" ? (
                 <>
                 <p className="font-semibold text-lg">
